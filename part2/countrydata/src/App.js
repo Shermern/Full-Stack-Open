@@ -307,11 +307,17 @@ const App = () => {
   }, [country])
 
   const handleChange = (event) => {
-    setValue(event.target.value)
-    if (countryToShow.length === 1) {
-      setCountry(countryToShow[0].name)
-    }
-    else {
+    const searchValue = event.target.value.toLowerCase()
+  
+    setValue(searchValue)
+  
+    const filteredCountries = countryNames.filter(country =>
+      country.name.toLowerCase().startsWith(searchValue)
+    )
+  
+    if (filteredCountries.length === 1) {
+      setCountry(filteredCountries[0].name)
+    } else {
       setCountry(null)
       setData(null)
     }
